@@ -17,7 +17,7 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 <section class="panel">
 <div class="toolbar"><span class="tag">● Motor remoto Groq · GPT-OSS 20B</span><button class="clear" id="clear" type="button">Nueva conversación</button></div>
 <div class="messages" id="messages" aria-live="polite"><div class="msg bot">Hola. Soy ULTRON. Para empezar, conecta tu clave privada de Groq en Configuración. La clave no se guarda en el repositorio.</div></div>
-<div class="typing" id="typing" hidden>ULTRON está pensando…</div><div class="voicebar"><button id="mic" type="button">🎙 Dictar mensaje</button><button id="voiceMode" type="button">🗣 Activar conversación por voz</button><button id="read" type="button">🔊 Leer última respuesta</button><button id="stopVoice" type="button">■ Detener voz</button><span class="memory" id="memoryStatus">Memoria local activada</span></div>
+<div class="typing" id="typing" hidden>ULTRON está pensando…</div><div class="voicebar"><button id="mic" type="button">🎙 Dictar mensaje</button><button id="voiceMode" type="button">🗣 Activar conversación por voz</button><button id="read" type="button">🔊 Leer última respuesta</button><button id="stopVoice" type="button">■ Detener voz</button><label class="memory" for="voiceSelect">Voz:</label><select id="voiceSelect" aria-label="Elegir voz"><option value="">Cargando voces…</option></select><span class="memory" id="memoryStatus">Memoria local activada</span></div>
 <form class="composer" id="form"><textarea id="prompt" rows="1" placeholder="Escribe tu mensaje…" aria-label="Mensaje"></textarea><button class="send" id="send" type="submit">Enviar</button></form>
 <details class="settings" open id="settings"><summary>⚙ CONFIGURAR ULTRON</summary>
 <label for="key">Tu clave API de Groq (privada)</label><input id="key" type="password" autocomplete="off" placeholder="Pega aquí tu clave gsk_…" spellcheck="false">
@@ -25,7 +25,14 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 <div class="actions"><button class="primary" id="connect" type="button">Conectar y probar</button><button id="forget" type="button">Borrar clave</button></div>
 <p>La clave se conserva solo en la sesión actual del navegador y se envía directamente a Groq. No la escribas en el chat, no la compartas y no la guardes en GitHub. Esta versión web no usa un servidor privado intermediario.</p>
 </details>
-<div class="note">La memoria guarda tus conversaciones en este navegador y dispositivo. No se sincroniza con otros equipos. Puedes borrarla con “Nueva conversación”. La voz depende de las funciones disponibles en tu navegador. El motor de IA sigue en la nube y necesita Internet; el modo local todavía requiere descargar e integrar un modelo compatible.</div>
+<details class="settings" id="creative"><summary>🎨 ESTUDIO CREATIVO · IMÁGENES Y ANIMACIONES</summary>
+<label for="imageKey">Clave API de OpenAI (separada de Groq)</label><input id="imageKey" type="password" autocomplete="off" placeholder="Pega aquí tu clave API de OpenAI" spellcheck="false">
+<label for="visualMode">Qué quieres crear</label><select id="visualMode"><option value="image">Imagen</option><option value="gif">Animación GIF</option></select>
+<label for="visualPrompt">Describe lo que quieres crear</label><textarea id="visualPrompt" rows="3" placeholder="Ej.: un robot futurista protector en una ciudad nocturna…"></textarea>
+<div class="actions"><button class="primary" id="createVisual" type="button">Crear ahora</button><button id="clearVisual" type="button">Borrar resultado</button></div>
+<div id="visualStatus" class="note" hidden></div><div id="visualResult"></div>
+<p>La generación usa la API de OpenAI y puede tener coste según tu cuenta. La clave se guarda solo en la sesión de este navegador y se envía directamente a OpenAI; no la compartas ni la pongas en GitHub. Para una versión pública necesitaríamos un servidor seguro. La animación se entrega como GIF, no como vídeo MP4.</p>
+</details>\n<div class="note">La memoria guarda tus conversaciones en este navegador y dispositivo. No se sincroniza con otros equipos. Puedes borrarla con “Nueva conversación”. La voz depende de las funciones disponibles en tu navegador. El motor de IA sigue en la nube y necesita Internet; el modo local todavía requiere descargar e integrar un modelo compatible.</div>
 </section><div class="foot">ULTRON · Proyecto independiente · Memoria local del navegador</div>
 </main>
 <script>
@@ -56,7 +63,7 @@ const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition
 let recognition=null;
 const mic=$('mic'),voiceButton=$('voiceMode');
 function startListening(){if(!recognition||!voiceMode||busy)return;try{recognition.start();voiceButton.textContent='🎙 Escuchando…';}catch(_){}}
-function speakText(text,continueListening=false){if(!('speechSynthesis'in window))return; speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang='es-AR';utterance.rate=1;utterance.pitch=1;const voices=speechSynthesis.getVoices();utterance.voice=voices.find(v=>v.lang&&v.lang.toLowerCase()==='es-ar')||voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('es'))||null;utterance.onend=()=>{if(continueListening&&voiceMode){voiceButton.textContent='🎙 Escuchando…';startListening();}};speechSynthesis.speak(utterance);}
+function speakText(text,continueListening=false){if(!('speechSynthesis'in window))return; speechSynthesis.cancel();const utterance=new SpeechSynthesisUtterance(text);utterance.lang='es-AR';utterance.rate=0.94;utterance.pitch=0.82;const voices=speechSynthesis.getVoices();const chosen=voiceSelect.value!==''?availableVoices[Number(voiceSelect.value)]:null;utterance.voice=chosen||voices.find(v=>v.lang&&v.lang.toLowerCase()==='es-ar')||voices.find(v=>v.lang&&v.lang.toLowerCase().startsWith('es'))||null;utterance.onend=()=>{if(continueListening&&voiceMode){voiceButton.textContent='🎙 Escuchando…';startListening();}};speechSynthesis.speak(utterance);}
 if(SpeechRecognition){
  recognition=new SpeechRecognition();recognition.lang='es-AR';recognition.interimResults=false;recognition.maxAlternatives=1;
  recognition.onresult=e=>{const spoken=e.results[0][0].transcript.trim();if(spoken){prompt.value=spoken;prompt.focus();form.requestSubmit();}};
@@ -67,6 +74,51 @@ if(SpeechRecognition){
 }else{mic.disabled=true;mic.textContent='Voz no compatible';voiceButton.disabled=true;voiceButton.textContent='Voz no compatible';}
 $('read').addEventListener('click',()=>{const last=[...history].reverse().find(x=>x.role==='assistant');if(!last){add('Todavía no tengo una respuesta para leer.');return;}speakText(last.content,false);});
 $('stopVoice').addEventListener('click',()=>{voiceMode=false;voiceButton.textContent='🗣 Activar conversación por voz';if('speechSynthesis'in window)speechSynthesis.cancel();if(recognition)try{recognition.stop();}catch(_){}});
+const voiceSelect=$('voiceSelect');
+let availableVoices=[];
+function loadVoices(){
+ if(!('speechSynthesis' in window))return;
+ availableVoices=speechSynthesis.getVoices().filter(v=>v.lang&&v.lang.toLowerCase().startsWith('es'));
+ const previous=voiceSelect.value;
+ voiceSelect.innerHTML='';
+ if(!availableVoices.length){voiceSelect.innerHTML='<option value="">Voz española no disponible</option>';return;}
+ availableVoices.forEach((v,i)=>{const opt=document.createElement('option');opt.value=String(i);opt.textContent=v.name+' ('+v.lang+')';voiceSelect.appendChild(opt);});
+ const maleHints=/male|mascul|pablo|jorge|diego|enrique|miguel|antonio|carlos|raul|raúl|andres|andrés|juan|sergio|david|hombre/i;
+ let preferred=availableVoices.findIndex(v=>maleHints.test(v.name));
+ if(previous!==''&&availableVoices[Number(previous)])preferred=Number(previous);
+ voiceSelect.value=String(preferred>=0?preferred:0);
+}
+if('speechSynthesis' in window){loadVoices();speechSynthesis.addEventListener?.('voiceschanged',loadVoices);}
+voiceSelect.addEventListener('change',()=>{if('speechSynthesis'in window)speechSynthesis.cancel();});
+$('createVisual').addEventListener('click',async()=>{
+ const apiKey=$('imageKey').value.trim()||sessionStorage.getItem('ultron_openai_key')||'';
+ const description=$('visualPrompt').value.trim();
+ const mode=$('visualMode').value;
+ if(!apiKey){$('visualStatus').hidden=false;$('visualStatus').textContent='Necesitas una clave API de OpenAI para crear imágenes o GIF. Es distinta de tu clave Groq.';return;}
+ if(!description){$('visualStatus').hidden=false;$('visualStatus').textContent='Describe primero lo que quieres crear.';return;}
+ sessionStorage.setItem('ultron_openai_key',apiKey);
+ const btn=$('createVisual');btn.disabled=true;btn.textContent='Creando…';
+ $('visualStatus').hidden=false;$('visualStatus').textContent=mode==='gif'?'Generando una animación GIF. Puede tardar un poco…':'Generando tu imagen. Puede tardar un poco…';
+ $('visualResult').innerHTML='';
+ try{
+  const body={model:'gpt-image-2.6-flare',prompt:description,n:1,output_format:mode==='gif'?'gif':'png'};
+  if(mode==='gif'){body.frame_count=8;body.frame_duration_ms=250;}
+  const response=await fetch('https://api.openai.com/v1/images/generations',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+apiKey},body:JSON.stringify(body)});
+  const data=await response.json();
+  if(!response.ok)throw new Error(data.error?.message||'Error de OpenAI ('+response.status+').');
+  const encoded=data.data?.[0]?.b64_json;
+  if(!encoded)throw new Error('El servicio no devolvió el archivo generado.');
+  const mime=mode==='gif'?'image/gif':'image/png';
+  const url='data:'+mime+';base64,'+encoded;
+  const img=document.createElement('img');img.src=url;img.alt=description;img.style.cssText='display:block;max-width:100%;height:auto;border-radius:14px;margin-top:12px;border:1px solid #293650';
+  const link=document.createElement('a');link.href=url;link.download=mode==='gif'?'ultron-animacion.gif':'ultron-imagen.png';link.textContent=mode==='gif'?'Descargar animación GIF':'Descargar imagen';link.style.cssText='display:inline-block;margin:12px 0;color:#7de4ef';
+  $('visualResult').append(img,link);
+  $('visualStatus').textContent=mode==='gif'?'Animación GIF creada. No es un vídeo MP4.':'Imagen creada correctamente.';
+ }catch(error){$('visualStatus').textContent='No se pudo crear el archivo: '+error.message+' Comprueba la clave, los permisos y el saldo de API.';}
+ finally{btn.disabled=false;btn.textContent='Crear ahora';}
+});
+$('clearVisual').addEventListener('click',()=>{$('visualResult').innerHTML='';$('visualStatus').hidden=true;});
+const savedImageKey=sessionStorage.getItem('ultron_openai_key');if(savedImageKey)$('imageKey').value=savedImageKey;
 const existing=sessionStorage.getItem('ultron_groq_key');if(existing){key.value=existing;setState('CLAVE EN ESTA SESIÓN');}
 })();
 </script></body></html>
