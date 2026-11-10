@@ -20,9 +20,9 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 <section class="hero"><h1>Hola. Soy <span>ULTRON.</span></h1><p>Tu asistente de inteligencia artificial. Conversación con contexto, respuestas reales y configuración sencilla.</p></section>
 <section class="panel">
 <div class="toolbar"><span class="tag">● Motor remoto Groq · GPT-OSS 20B</span><button class="clear" id="clear" type="button">Nueva conversación</button></div>
-<div class="messages" id="messages" aria-live="polite"><div class="msg bot">Hola. Soy ULTRON. Para empezar, conecta tu clave privada de Groq en Configuración. La clave no se guarda en el repositorio.</div></div>
+<div class="messages" id="messages" aria-live="polite"><div class="msg bot">Hola. Soy ULTRON. Puedes abrir los asistentes gratuitos de la sección “Conversar con IA sin claves API” y crear imágenes o vídeos desde el Estudio Creativo Gratis. No necesitas copiar claves API.</div></div>
 <div class="typing" id="typing" hidden>ULTRON está pensando…</div><div class="voicebar"><button id="mic" type="button">🎙 Dictar mensaje</button><button id="voiceMode" type="button">🗣 Activar conversación por voz</button><button id="read" type="button">🔊 Leer última respuesta</button><button id="stopVoice" type="button">■ Detener voz</button><label class="memory" for="voiceSelect">Voz Android:</label><select id="voiceSelect" aria-label="Elegir voz Android"><option value="">Cargando voces…</option></select><label class="memory" for="naturalVoice">Voz IA:</label><select id="naturalVoice" aria-label="Elegir voz IA"><option value="onyx">Onyx · grave</option><option value="echo">Echo · masculina</option><option value="ash">Ash · firme</option><option value="ballad">Ballad · cálida</option></select><span class="memory" id="memoryStatus">Memoria local activada</span></div>
-<form class="composer" id="form"><textarea id="prompt" rows="1" placeholder="Escribe tu mensaje…" aria-label="Mensaje"></textarea><button class="send" id="send" type="submit">Enviar</button></form>
+<form class="composer" id="form" style="display:none"><textarea id="prompt" rows="1" placeholder="Escribe tu mensaje…" aria-label="Mensaje"></textarea><button class="send" id="send" type="submit">Enviar</button></form>
 <div class="sectionTitle">💬 CONVERSAR CON IA SIN CLAVES API</div>
 <div class="workspace">
 <a class="toolcard" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer"><small>Cuenta gratuita</small><b>ChatGPT</b><span>Conversar con IA desde la web o aplicación oficial.</span></a>
@@ -31,7 +31,7 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 <a class="toolcard" href="https://qwen.ai/" target="_blank" rel="noopener noreferrer"><small>Acceso web</small><b>Qwen Chat</b><span>Conversación y herramientas multimodales según disponibilidad.</span></a>
 </div>
 <p class="note">Para que el chat responda dentro de ULTRON sin una clave API propia haría falta un proveedor que ofrezca acceso integrado con inicio de sesión o un servidor propio. Por ahora, estos accesos abren los chats originales sin que tengas que copiar claves. La caja de chat interna sigue siendo opcional y requiere Groq.</p>
-<details class="settings" open id="settings"><summary>⚙ CONFIGURAR ULTRON</summary>
+<details class="settings" id="settings" style="display:none"><summary>⚙ CONFIGURAR ULTRON</summary>
 <label for="key">Tu clave API de Groq (privada)</label><input id="key" type="password" autocomplete="off" placeholder="Pega aquí tu clave gsk_…" spellcheck="false">
 <label for="model">Modelo de IA</label><select id="model"><option value="openai/gpt-oss-20b">GPT-OSS 20B · recomendado</option><option value="llama-3.3-70b-versatile">Llama 3.3 70B</option><option value="llama-3.1-8b-instant">Llama 3.1 8B · rápido</option></select>
 <div class="actions"><button class="primary" id="connect" type="button">Conectar y probar</button><button id="forget" type="button">Borrar clave</button></div>
