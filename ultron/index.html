@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090d17"><meta name="description" content="ULTRON, asistente personal de IA.">
-<title>ULTRON — Asistente personal</title><link rel="manifest" href="./manifest.webmanifest">
+<title>ULTRON — Asistente personal</title><script src="https://js.puter.com/v2/"></script><link rel="manifest" href="./manifest.webmanifest">
 <style>
 :root{color-scheme:dark;--bg:#090d17;--panel:#111a2b;--line:#293650;--muted:#9aabc2;--cyan:#7de4ef;--white:#edf4ff;--red:#ff8e8e}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -25%,#24365b 0,transparent 58%),var(--bg);color:var(--white);font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
@@ -16,21 +16,14 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 </style>
 </head>
 <body><main>
-<header class="top"><div class="brand"><div class="logo">U</div><div><strong>ULTRON</strong><small>ASISTENTE PERSONAL</small></div></div><div class="state" id="state">● FALTA CONECTAR</div></header>
-<section class="hero"><h1>Hola. Soy <span>ULTRON.</span></h1><p>Tu asistente de inteligencia artificial. Conversación con contexto, respuestas reales y configuración sencilla.</p></section>
+<header class="top"><div class="brand"><div class="logo">U</div><div><strong>ULTRON</strong><small>ASISTENTE PERSONAL</small></div></div><div class="state" id="state">● INICIANDO ULTRON</div></header>
+<section class="hero"><h1>Hola. Soy <span>ULTRON.</span></h1><p>Tu asistente de inteligencia artificial. Conversación, voz, memoria y creación multimedia desde un solo lugar.</p></section>
 <section class="panel">
 <div class="toolbar"><span class="tag">● Motor remoto Groq · GPT-OSS 20B</span><button class="clear" id="clear" type="button">Nueva conversación</button></div>
-<div class="messages" id="messages" aria-live="polite"><div class="msg bot">Hola. Soy ULTRON. Puedes abrir los asistentes gratuitos de la sección “Conversar con IA sin claves API” y crear imágenes o vídeos desde el Estudio Creativo Gratis. No necesitas copiar claves API.</div></div>
+<div class="messages" id="messages" aria-live="polite"><div class="msg bot">Hola, Carlos. Soy ULTRON, tu asistente. Ya puedes conversar conmigo desde aquí, usar la voz y crear imágenes o vídeos en mi Estudio Creativo. No necesitas copiar claves API.</div></div>
 <div class="typing" id="typing" hidden>ULTRON está pensando…</div><div class="voicebar"><button id="mic" type="button">🎙 Dictar mensaje</button><button id="voiceMode" type="button">🗣 Activar conversación por voz</button><button id="read" type="button">🔊 Leer última respuesta</button><button id="stopVoice" type="button">■ Detener voz</button><label class="memory" for="voiceSelect">Voz Android:</label><select id="voiceSelect" aria-label="Elegir voz Android"><option value="">Cargando voces…</option></select><label class="memory" for="naturalVoice">Voz IA:</label><select id="naturalVoice" aria-label="Elegir voz IA"><option value="onyx">Onyx · grave</option><option value="echo">Echo · masculina</option><option value="ash">Ash · firme</option><option value="ballad">Ballad · cálida</option></select><span class="memory" id="memoryStatus">Memoria local activada</span></div>
-<form class="composer" id="form" style="display:none"><textarea id="prompt" rows="1" placeholder="Escribe tu mensaje…" aria-label="Mensaje"></textarea><button class="send" id="send" type="submit">Enviar</button></form>
-<div class="sectionTitle">💬 CONVERSAR CON IA SIN CLAVES API</div>
-<div class="workspace">
-<a class="toolcard" href="https://chatgpt.com/" target="_blank" rel="noopener noreferrer"><small>Cuenta gratuita</small><b>ChatGPT</b><span>Conversar con IA desde la web o aplicación oficial.</span></a>
-<a class="toolcard" href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer"><small>Cuenta gratuita</small><b>Google Gemini</b><span>Chat, ayuda y funciones creativas según disponibilidad regional.</span></a>
-<a class="toolcard" href="https://copilot.microsoft.com/" target="_blank" rel="noopener noreferrer"><small>Acceso web</small><b>Microsoft Copilot</b><span>Asistente de IA con acceso gratuito sujeto a límites.</span></a>
-<a class="toolcard" href="https://qwen.ai/" target="_blank" rel="noopener noreferrer"><small>Acceso web</small><b>Qwen Chat</b><span>Conversación y herramientas multimodales según disponibilidad.</span></a>
-</div>
-<p class="note">Para que el chat responda dentro de ULTRON sin una clave API propia haría falta un proveedor que ofrezca acceso integrado con inicio de sesión o un servidor propio. Por ahora, estos accesos abren los chats originales sin que tengas que copiar claves. La caja de chat interna sigue siendo opcional y requiere Groq.</p>
+<form class="composer" id="form" style="display:flex"><textarea id="prompt" rows="1" placeholder="Escribe tu mensaje…" aria-label="Mensaje"></textarea><button class="send" id="send" type="submit">Enviar</button></form>
+<p class="note">Chat, voz, memoria y creación multimedia se controlan desde ULTRON. El motor usa un proveedor en la nube integrado; no necesitas pegar claves API. El proveedor puede solicitar iniciar sesión y aplicar límites o créditos propios.</p>
 <details class="settings" id="settings" style="display:none"><summary>⚙ CONFIGURAR ULTRON</summary>
 <label for="key">Tu clave API de Groq (privada)</label><input id="key" type="password" autocomplete="off" placeholder="Pega aquí tu clave gsk_…" spellcheck="false">
 <label for="model">Modelo de IA</label><select id="model"><option value="openai/gpt-oss-20b">GPT-OSS 20B · recomendado</option><option value="llama-3.3-70b-versatile">Llama 3.3 70B</option><option value="llama-3.1-8b-instant">Llama 3.1 8B · rápido</option></select>
@@ -45,31 +38,19 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 <div id="visualStatus" class="note" hidden></div><div id="visualResult"></div>
 <p>La generación usa la API de OpenAI y puede tener coste según tu cuenta. La clave se guarda solo en la sesión de este navegador y se envía directamente a OpenAI; no la compartas ni la pongas en GitHub. Para una versión pública necesitaríamos un servidor seguro. La animación se entrega como GIF, no como vídeo MP4.</p>
 </details>
-<details class="settings" id="videoStudio" open><summary>✨ CREAR IMÁGENES Y VÍDEOS · SIN CLAVES API</summary>
-<p class="studioIntro">ULTRON te ofrece accesos directos a generadores externos que funcionan desde el navegador, sin que tengas que copiar claves API ni configurar servicios. Toca una herramienta, escribe tu idea en su página y genera allí. No se activa ningún plan de pago desde ULTRON.</p>
-<div class="sectionTitle">🎥 VÍDEOS GRATIS</div>
-<div class="workspace">
-<a class="toolcard" href="https://freevideoai.org/" target="_blank" rel="noopener noreferrer"><small>Sin registro · sin API</small><b>FreeVideoAI</b><span>Genera clips de 5 segundos en 480p con modelos públicos. Puede haber cola y límites por disponibilidad.</span></a>
-<a class="toolcard" href="https://wan2.video/" target="_blank" rel="noopener noreferrer"><small>Sin registro · sin API</small><b>Wan2.Video</b><span>Texto a vídeo e imagen a vídeo con modelos Wan y LTX mediante colas GPU públicas.</span></a>
-<a class="toolcard" href="https://free.ai/video/?lang=es" target="_blank" rel="noopener noreferrer"><small>Sin API · tokens gratis</small><b>Free.ai Vídeo</b><span>Generador con CogVideoX; ofrece créditos diarios gratuitos según su página.</span></a>
-<a class="toolcard" href="https://www.bing.com/create" target="_blank" rel="noopener noreferrer"><small>Gratis con límites</small><b>Bing Video Creator</b><span>Vídeos cortos desde el móvil; la velocidad gratuita puede variar.</span></a>
-<a class="toolcard" href="https://www.vidu.com/" target="_blank" rel="noopener noreferrer"><small>Créditos de bienvenida</small><b>Vidu AI</b><span>Comprueba los créditos de prueba disponibles al crear una cuenta; pueden variar.</span></a>
-<a class="toolcard" href="https://hailuolabs.ai/" target="_blank" rel="noopener noreferrer"><small>Plan gratuito limitado</small><b>Hailuo AI</b><span>Créditos gratuitos sujetos a disponibilidad, cuenta y condiciones regionales.</span></a>
-</div>
-<div class="sectionTitle">🖼 IMÁGENES GRATIS</div>
-<div class="workspace">
-<a class="toolcard" href="https://freewebimage.com/es/" target="_blank" rel="noopener noreferrer"><small>Sin registro · sin API</small><b>FreeWebImage</b><span>Una imagen gratis al día; permite desbloquear más generaciones con anuncios recompensados.</span></a>
-<a class="toolcard" href="https://freegpt.im/" target="_blank" rel="noopener noreferrer"><small>Sin API · cupo diario</small><b>FreeGPT.IM</b><span>Generación y edición de imágenes sin cuenta OpenAI ni clave API; límite gratuito diario.</span></a>
-<a class="toolcard" href="https://orylia.ai/ai-models/orylia" target="_blank" rel="noopener noreferrer"><small>Gratis con cuenta</small><b>Orylia</b><span>Generador de imágenes de su propio modelo, sin coste por imagen en el nivel gratuito.</span></a>
-<a class="toolcard" href="https://utilmesh.com/tools/ai-image-generator" target="_blank" rel="noopener noreferrer"><small>Sin clave API</small><b>UtilMesh</b><span>Opciones gratuitas HD y de comunidad; las colas públicas pueden tardar.</span></a>
-<a class="toolcard" href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer"><small>Gratis con límites</small><b>Bing Image Creator</b><span>Generador de imágenes de Microsoft con uso gratuito sujeto a límites.</span></a>
-<a class="toolcard" href="https://www.opera.com/es-419/features/opera-ai-image-generator" target="_blank" rel="noopener noreferrer"><small>Gratis · sin cuenta</small><b>Opera AI Image</b><span>Generación de imágenes gratuita desde Opera; puede requerir usar ese navegador.</span></a>
-</div>
-<div class="note">Transparencia: estas herramientas se ejecutan en sus propias páginas, no dentro del motor de conversación de ULTRON. Los servicios gratuitos pueden tener colas, límites, marcas de agua, cambios de condiciones o dejar de estar disponibles. No ingreses datos privados ni fotos sensibles en servicios desconocidos. Evita cualquier botón que active una suscripción o pida tarjeta si no quieres pagar.</div>
-<div hidden aria-hidden="true">
-<input id="videoKey"><textarea id="videoPrompt"></textarea><select id="videoRatio"><option value="16:9">16:9</option></select><select id="videoResolution"><option value="720p">720p</option></select><button id="createVideo" type="button"></button><button id="clearVideo" type="button"></button><div id="videoStatus"></div><div id="videoResult"></div>
-</div>
-</details>\n<div class="note">La voz IA usa la clave OpenAI que introduzcas en Estudio creativo; si no hay clave, se usa la voz disponible en Android. El audio es generado por IA y puede tener coste. La memoria guarda tus conversaciones en este navegador y dispositivo. No se sincroniza con otros equipos. Puedes borrarla con “Nueva conversación”. La voz depende de las funciones disponibles en tu navegador. El motor de IA sigue en la nube y necesita Internet; el modo local todavía requiere descargar e integrar un modelo compatible.</div>
+<details class="settings" id="videoStudio" open>
+<summary>✨ ESTUDIO CREATIVO INTEGRADO · ULTRON</summary>
+<p class="studioIntro">Crea desde esta misma pantalla. ULTRON usa Puter.js como pasarela de IA en la nube; no te pide claves API. Puede pedirte iniciar sesión y aplicar cuotas o créditos de tu cuenta. No compres créditos ni actives planes si quieres mantenerte en el nivel gratuito.</p>
+<div class="sectionTitle">🖼 GENERAR IMAGEN</div>
+<label for="nativeImagePrompt">Describe la imagen</label><textarea id="nativeImagePrompt" rows="3" placeholder="Ej.: ULTRON, un robot futurista protector en una ciudad nocturna…"></textarea>
+<div class="actions"><button class="primary" id="nativeImageButton" type="button">Crear imagen</button></div>
+<div id="nativeImageStatus" class="note" hidden></div><div id="nativeImageResult"></div>
+<div class="sectionTitle">🎬 GENERAR VÍDEO</div>
+<label for="nativeVideoPrompt">Describe el vídeo y el movimiento</label><textarea id="nativeVideoPrompt" rows="3" placeholder="Ej.: cámara cinematográfica rodeando a ULTRON mientras se encienden sus ojos rojos…"></textarea>
+<div class="actions"><button class="primary" id="nativeVideoButton" type="button">Generar vídeo</button></div>
+<div id="nativeVideoStatus" class="note" hidden></div><div id="nativeVideoResult"></div>
+<div class="note">La generación se procesa en la nube y puede tardar. La disponibilidad, modelos, calidad, límites y posibles créditos dependen de Puter y de los proveedores que tenga habilitados. ULTRON no realiza compras ni suscripciones automáticamente. Si aparece una pantalla de pago, cancélala.</div>
+</details>\n<div class="note">La voz utiliza la voz masculina española disponible en Android; el motor de conversación y el estudio creativo usan servicios de nube integrados. La memoria guarda tus conversaciones en este navegador y dispositivo. No se sincroniza con otros equipos. Puedes borrarla con “Nueva conversación”. La voz depende de las funciones disponibles en tu navegador. El motor de IA funciona en la nube y necesita Internet; el modo local todavía requiere descargar e integrar un modelo compatible.</div>
 </section><div class="foot">ULTRON · Proyecto independiente · Memoria local del navegador</div>
 </main>
 <script>
@@ -93,9 +74,19 @@ setState('CONECTANDO');try{const r=await fetch('https://api.groq.com/openai/v1/m
 $('connect').addEventListener('click',async()=>{if(key.value.trim())sessionStorage.setItem('ultron_groq_key',key.value.trim());await connect();});
 $('forget').addEventListener('click',()=>{sessionStorage.removeItem('ultron_groq_key');key.value='';setState('FALTA CONECTAR');add('Clave borrada de esta sesión.','bot');});
 $('clear').addEventListener('click',()=>{history.splice(1);localStorage.removeItem(MEMORY_KEY);messages.innerHTML='';add('Nueva conversación. ¿En qué puedo ayudarte?');$('memoryStatus').textContent='Memoria local borrada';});
-form.addEventListener('submit',async e=>{e.preventDefault();const q=prompt.value.trim();if(!q||busy)return;if(!savedKey()){add('Antes de conversar, conecta tu clave API en Configurar ULTRON.','bot',true);$('settings').open=true;return;}
-prompt.value='';add(q,'user');history.push({role:'user',content:q});saveMemory();busy=true;send.disabled=true;typing.hidden=false;
-try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+savedKey()},body:JSON.stringify({model:model.value,messages:history,temperature:0.7,max_tokens:2048})});const data=await r.json();if(!r.ok)throw new Error(data.error?.message||'Error del proveedor ('+r.status+').');const answer=data.choices?.[0]?.message?.content;if(!answer)throw new Error('El proveedor no devolvió texto.');history.push({role:'assistant',content:answer});saveMemory();add(answer);lastAnswerText=answer;setState('CONECTADO',true);if(voiceMode)speakText(answer,true);}catch(err){history.pop();add('No pude obtener respuesta: '+err.message+'. Si el navegador bloquea la solicitud, necesitaremos un pequeño servidor seguro como intermediario.','bot',true);setState('REVISAR CONEXIÓN');}finally{busy=false;send.disabled=false;typing.hidden=true;prompt.focus();if(voiceMode&&!(window.speechSynthesis&&speechSynthesis.speaking))startListening();}});
+form.addEventListener('submit',async e=>{
+ e.preventDefault();const q=prompt.value.trim();if(!q||busy)return;
+ if(!window.puter?.ai?.chat){add('El motor de ULTRON todavía se está cargando. Comprueba tu conexión e inténtalo de nuevo.','bot',true);return;}
+ prompt.value='';add(q,'user');history.push({role:'user',content:q});saveMemory();busy=true;send.disabled=true;typing.hidden=false;setState('PENSANDO…');
+ try{
+  const result=await puter.ai.chat(history,false,{model:'gpt-5.4-nano'});
+  const raw=result?.message?.content??result?.content??result;
+  const answer=Array.isArray(raw)?raw.map(part=>part.text||'').join('\n'):String(raw||'').trim();
+  if(!answer)throw new Error('El proveedor no devolvió texto.');
+  history.push({role:'assistant',content:answer});saveMemory();add(answer);lastAnswerText=answer;setState('ULTRON EN LÍNEA',true);if(voiceMode)speakText(answer,true);
+ }catch(err){history.pop();add('No pude responder: '+(err?.message||String(err))+'. Puede que el proveedor esté ocupado, que necesites iniciar sesión en Puter o que se haya agotado la cuota gratuita.','bot',true);setState('REVISAR MOTOR');}
+ finally{busy=false;send.disabled=false;typing.hidden=true;prompt.focus();if(voiceMode&&!(window.speechSynthesis&&speechSynthesis.speaking))startListening();}
+});
 const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
 let recognition=null;
 const mic=$('mic'),voiceButton=$('voiceMode');
@@ -218,6 +209,37 @@ const savedImageKey=sessionStorage.getItem('ultron_openai_key');if(savedImageKey
 $('imageKey').addEventListener('change',()=>{if($('imageKey').value.trim())sessionStorage.setItem('ultron_openai_key',$('imageKey').value.trim());});
 $('naturalVoice').addEventListener('change',()=>{if(naturalAudio){naturalAudio.pause();naturalAudio=null;}if(naturalAudioUrl){URL.revokeObjectURL(naturalAudioUrl);naturalAudioUrl=null;}});
 
+
+// Motor integrado de chat e imagen/vídeo mediante Puter.js.
+function showStudioStatus(id,message){const el=$(id);el.hidden=false;el.textContent=message;}
+$('nativeImageButton').addEventListener('click',async()=>{
+ const description=$('nativeImagePrompt').value.trim();if(!description){showStudioStatus('nativeImageStatus','Escribe una descripción para la imagen.');return;}
+ const btn=$('nativeImageButton');btn.disabled=true;btn.textContent='Creando…';showStudioStatus('nativeImageStatus','ULTRON está generando tu imagen en la nube…');$('nativeImageResult').innerHTML='';
+ try{
+  if(!window.puter?.ai?.txt2img)throw new Error('El motor creativo no está disponible.');
+  const generated=await puter.ai.txt2img(description);
+  const img=generated?.tagName?.toLowerCase()==='img'?generated:null;
+  if(!img)throw new Error('El proveedor no devolvió una imagen visible.');
+  img.alt=description;img.style.cssText='display:block;max-width:100%;height:auto;border-radius:14px;margin-top:12px;border:1px solid #293650';
+  $('nativeImageResult').appendChild(img);showStudioStatus('nativeImageStatus','Imagen creada dentro de ULTRON.');
+ }catch(error){showStudioStatus('nativeImageStatus','No se pudo crear la imagen: '+(error?.message||String(error))+' Si aparece un inicio de sesión, completa el acceso en la ventana de Puter. No aceptes compras si no deseas pagar.');}
+ finally{btn.disabled=false;btn.textContent='Crear imagen';}
+});
+$('nativeVideoButton').addEventListener('click',async()=>{
+ const description=$('nativeVideoPrompt').value.trim();if(!description){showStudioStatus('nativeVideoStatus','Escribe qué vídeo quieres crear.');return;}
+ const btn=$('nativeVideoButton');btn.disabled=true;btn.textContent='Generando…';showStudioStatus('nativeVideoStatus','ULTRON está generando el vídeo. Puede tardar varios minutos; no cierres esta página.');$('nativeVideoResult').innerHTML='';
+ try{
+  if(!window.puter?.ai?.txt2vid)throw new Error('El motor de vídeo no está disponible.');
+  const generated=await puter.ai.txt2vid(description);
+  let video=generated?.tagName?.toLowerCase()==='video'?generated:null;
+  if(!video&&generated?.url){video=document.createElement('video');video.src=generated.url;}
+  if(!video)throw new Error('El proveedor no devolvió un vídeo reproducible.');
+  video.controls=true;video.playsInline=true;video.style.cssText='display:block;width:100%;max-height:420px;margin-top:12px;border-radius:14px;background:#000';
+  $('nativeVideoResult').appendChild(video);showStudioStatus('nativeVideoStatus','Vídeo listo. Puedes reproducirlo aquí dentro de ULTRON.');
+ }catch(error){showStudioStatus('nativeVideoStatus','No se pudo generar el vídeo: '+(error?.message||String(error))+' La función puede requerir iniciar sesión, tener créditos disponibles o un modelo habilitado. Cancela cualquier pantalla de pago si no deseas gastar.');}
+ finally{btn.disabled=false;btn.textContent='Generar vídeo';}
+});
+if(window.puter?.ai){setState('ULTRON EN LÍNEA',true);}else{setState('CARGANDO MOTOR');}
 const existing=sessionStorage.getItem('ultron_groq_key');if(existing){key.value=existing;setState('CLAVE EN ESTA SESIÓN');}
 })();
 </script></body></html>
