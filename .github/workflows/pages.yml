@@ -19,12 +19,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Prepare website
+        run: |
+          mkdir -p dist
+          cp index.html dist/index.html
       - name: Configure Pages
         uses: actions/configure-pages@v5
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: web
+          path: dist
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
