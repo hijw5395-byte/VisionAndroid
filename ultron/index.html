@@ -29,7 +29,7 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 <div class="actions"><button class="primary" id="connect" type="button">Conectar y probar</button><button id="forget" type="button">Borrar clave</button></div>
 <p>La clave se conserva solo en la sesión actual del navegador y se envía directamente a Groq. No la escribas en el chat, no la compartas y no la guardes en GitHub. Esta versión web no usa un servidor privado intermediario.</p>
 </details>
-<details class="settings" id="creative"><summary>🎨 ESTUDIO CREATIVO · IMÁGENES Y ANIMACIONES</summary>
+<details class="settings" id="creative" style="display:none"><summary>🎨 ESTUDIO CREATIVO · IMÁGENES Y ANIMACIONES</summary>
 <label for="imageKey">Clave API de OpenAI (separada de Groq)</label><input id="imageKey" type="password" autocomplete="off" placeholder="Pega aquí tu clave API de OpenAI" spellcheck="false">
 <label for="visualMode">Qué quieres crear</label><select id="visualMode"><option value="image">Imagen</option><option value="gif">Animación GIF</option></select>
 <label for="visualPrompt">Describe lo que quieres crear</label><textarea id="visualPrompt" rows="3" placeholder="Ej.: un robot futurista protector en una ciudad nocturna…"></textarea>
@@ -37,27 +37,30 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 <div id="visualStatus" class="note" hidden></div><div id="visualResult"></div>
 <p>La generación usa la API de OpenAI y puede tener coste según tu cuenta. La clave se guarda solo en la sesión de este navegador y se envía directamente a OpenAI; no la compartas ni la pongas en GitHub. Para una versión pública necesitaríamos un servidor seguro. La animación se entrega como GIF, no como vídeo MP4.</p>
 </details>
-<details class="settings" id="videoStudio" open><summary>🎬 ESTUDIO CREATIVO GRATIS · IMÁGENES Y VÍDEOS</summary>
-<p class="studioIntro">Reuní generadores que ofrecen uso gratuito, créditos de regalo o límites diarios. ULTRON no te pedirá una clave API ni activará una suscripción: cada servicio abre su propia página y sus condiciones gratuitas pueden cambiar.</p>
-<div class="sectionTitle">🎥 Crear vídeos</div>
+<details class="settings" id="videoStudio" open><summary>✨ CREAR IMÁGENES Y VÍDEOS · SIN CLAVES API</summary>
+<p class="studioIntro">ULTRON te ofrece accesos directos a generadores externos que funcionan desde el navegador, sin que tengas que copiar claves API ni configurar servicios. Toca una herramienta, escribe tu idea en su página y genera allí. No se activa ningún plan de pago desde ULTRON.</p>
+<div class="sectionTitle">🎥 VÍDEOS GRATIS</div>
 <div class="workspace">
-<a class="toolcard" href="https://zsky.ai/" target="_blank" rel="noopener noreferrer"><small>Gratis según proveedor</small><b>ZSky AI</b><span>Vídeo e imagen; el plan Free anuncia generaciones ilimitadas, cola compartida y marca de agua.</span></a>
-<a class="toolcard" href="https://www.bing.com/create" target="_blank" rel="noopener noreferrer"><small>Gratis · velocidad estándar</small><b>Bing Video Creator</b><span>Vídeos cortos desde el móvil. 10 generaciones rápidas iniciales; después puedes usar modo estándar gratuito.</span></a>
-<a class="toolcard" href="https://qwen.ai/" target="_blank" rel="noopener noreferrer"><small>Gratis en la web</small><b>Qwen Studio</b><span>Asistente con herramientas de creación de imágenes y vídeo; disponibilidad según cuenta y región.</span></a>
-<a class="toolcard" href="https://hailuolabs.ai/" target="_blank" rel="noopener noreferrer"><small>Créditos mensuales</small><b>Hailuo AI</b><span>Plan gratuito anunciado con 160 créditos al mes; vídeos 512p con marca de agua.</span></a>
-<a class="toolcard" href="https://www.google.com/flow/" target="_blank" rel="noopener noreferrer"><small>Créditos diarios</small><b>Google Flow</b><span>Google anuncia 50 créditos diarios sin suscripción en regiones compatibles. Algunas funciones pueden exigir plan.</span></a>
-<a class="toolcard" href="https://www.vidu.com/" target="_blank" rel="noopener noreferrer"><small>Créditos de bienvenida</small><b>Vidu AI</b><span>Prueba sus créditos gratuitos y recompensas de acceso; cantidad y disponibilidad pueden variar.</span></a>
+<a class="toolcard" href="https://freevideoai.org/" target="_blank" rel="noopener noreferrer"><small>Sin registro · sin API</small><b>FreeVideoAI</b><span>Genera clips de 5 segundos en 480p con modelos públicos. Puede haber cola y límites por disponibilidad.</span></a>
+<a class="toolcard" href="https://wan2.video/" target="_blank" rel="noopener noreferrer"><small>Sin registro · sin API</small><b>Wan2.Video</b><span>Texto a vídeo e imagen a vídeo con modelos Wan y LTX mediante colas GPU públicas.</span></a>
+<a class="toolcard" href="https://free.ai/video/?lang=es" target="_blank" rel="noopener noreferrer"><small>Sin API · tokens gratis</small><b>Free.ai Vídeo</b><span>Generador con CogVideoX; ofrece créditos diarios gratuitos según su página.</span></a>
+<a class="toolcard" href="https://www.bing.com/create" target="_blank" rel="noopener noreferrer"><small>Gratis con límites</small><b>Bing Video Creator</b><span>Vídeos cortos desde el móvil; la velocidad gratuita puede variar.</span></a>
+<a class="toolcard" href="https://www.vidu.com/" target="_blank" rel="noopener noreferrer"><small>Créditos de bienvenida</small><b>Vidu AI</b><span>Comprueba los créditos de prueba disponibles al crear una cuenta; pueden variar.</span></a>
+<a class="toolcard" href="https://hailuolabs.ai/" target="_blank" rel="noopener noreferrer"><small>Plan gratuito limitado</small><b>Hailuo AI</b><span>Créditos gratuitos sujetos a disponibilidad, cuenta y condiciones regionales.</span></a>
 </div>
-<div class="sectionTitle">🖼 Crear imágenes</div>
+<div class="sectionTitle">🖼 IMÁGENES GRATIS</div>
 <div class="workspace">
-<a class="toolcard" href="https://www.krea.ai/" target="_blank" rel="noopener noreferrer"><small>5 imágenes diarias</small><b>Krea AI</b><span>Generación y edición de imágenes; el sitio anuncia cinco generaciones gratuitas al día.</span></a>
-<a class="toolcard" href="https://zsky.ai/" target="_blank" rel="noopener noreferrer"><small>Gratis según proveedor</small><b>ZSky AI</b><span>Generación de imágenes y edición; marca de agua en el nivel gratuito.</span></a>
-<a class="toolcard" href="https://qwen.ai/" target="_blank" rel="noopener noreferrer"><small>Gratis en la web</small><b>Qwen Image</b><span>Crea imágenes, modifica referencias y explora estilos desde Qwen Studio.</span></a>
-<a class="toolcard" href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer"><small>Gratis con límites</small><b>Bing Image Creator</b><span>Generador de imágenes de Microsoft con uso gratuito y límites de velocidad.</span></a>
-<a class="toolcard" href="https://www.adobe.com/products/firefly.html" target="_blank" rel="noopener noreferrer"><small>Créditos gratuitos limitados</small><b>Adobe Firefly</b><span>Prueba generaciones de imagen con créditos gratuitos sujetos a la cuenta.</span></a>
-<a class="toolcard" href="https://www.vidu.com/" target="_blank" rel="noopener noreferrer"><small>Créditos de bienvenida</small><b>Vidu Image</b><span>Explora generación y edición de imágenes con los créditos que ofrezca tu cuenta.</span></a>
+<a class="toolcard" href="https://freewebimage.com/es/" target="_blank" rel="noopener noreferrer"><small>Sin registro · sin API</small><b>FreeWebImage</b><span>Una imagen gratis al día; permite desbloquear más generaciones con anuncios recompensados.</span></a>
+<a class="toolcard" href="https://freegpt.im/" target="_blank" rel="noopener noreferrer"><small>Sin API · cupo diario</small><b>FreeGPT.IM</b><span>Generación y edición de imágenes sin cuenta OpenAI ni clave API; límite gratuito diario.</span></a>
+<a class="toolcard" href="https://orylia.ai/ai-models/orylia" target="_blank" rel="noopener noreferrer"><small>Gratis con cuenta</small><b>Orylia</b><span>Generador de imágenes de su propio modelo, sin coste por imagen en el nivel gratuito.</span></a>
+<a class="toolcard" href="https://utilmesh.com/tools/ai-image-generator" target="_blank" rel="noopener noreferrer"><small>Sin clave API</small><b>UtilMesh</b><span>Opciones gratuitas HD y de comunidad; las colas públicas pueden tardar.</span></a>
+<a class="toolcard" href="https://www.bing.com/images/create" target="_blank" rel="noopener noreferrer"><small>Gratis con límites</small><b>Bing Image Creator</b><span>Generador de imágenes de Microsoft con uso gratuito sujeto a límites.</span></a>
+<a class="toolcard" href="https://www.opera.com/es-419/features/opera-ai-image-generator" target="_blank" rel="noopener noreferrer"><small>Gratis · sin cuenta</small><b>Opera AI Image</b><span>Generación de imágenes gratuita desde Opera; puede requerir usar ese navegador.</span></a>
 </div>
-<div class="note">Importante: estos son accesos directos a servicios externos, no APIs conectadas dentro del chat de ULTRON. Cada proveedor controla sus límites, disponibilidad en Argentina, marcas de agua y términos. No uses pruebas que pidan tarjeta si no quieres arriesgar un cobro; evita activar planes o pruebas con renovación automática. No existe una forma honesta de garantizar generación ilimitada gratis en todos los servicios.</div>
+<div class="note">Transparencia: estas herramientas se ejecutan en sus propias páginas, no dentro del motor de conversación de ULTRON. Los servicios gratuitos pueden tener colas, límites, marcas de agua, cambios de condiciones o dejar de estar disponibles. No ingreses datos privados ni fotos sensibles en servicios desconocidos. Evita cualquier botón que active una suscripción o pida tarjeta si no quieres pagar.</div>
+<div hidden aria-hidden="true">
+<input id="videoKey"><textarea id="videoPrompt"></textarea><select id="videoRatio"><option value="16:9">16:9</option></select><select id="videoResolution"><option value="720p">720p</option></select><button id="createVideo" type="button"></button><button id="clearVideo" type="button"></button><div id="videoStatus"></div><div id="videoResult"></div>
+</div>
 </details>\n<div class="note">La voz IA usa la clave OpenAI que introduzcas en Estudio creativo; si no hay clave, se usa la voz disponible en Android. El audio es generado por IA y puede tener coste. La memoria guarda tus conversaciones en este navegador y dispositivo. No se sincroniza con otros equipos. Puedes borrarla con “Nueva conversación”. La voz depende de las funciones disponibles en tu navegador. El motor de IA sigue en la nube y necesita Internet; el modo local todavía requiere descargar e integrar un modelo compatible.</div>
 </section><div class="foot">ULTRON · Proyecto independiente · Memoria local del navegador</div>
 </main>
