@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090d17"><meta name="description" content="ULTRON, asistente personal de IA.">
+<title>ULTRON — Asistente personal</title>
+<style>
+:root{color-scheme:dark;--bg:#090d17;--panel:#111a2b;--line:#293650;--muted:#9aabc2;--cyan:#7de4ef;--white:#edf4ff;--red:#ff8e8e}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -25%,#24365b 0,transparent 58%),var(--bg);color:var(--white);font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:8px 2px 22px}.brand{display:flex;align-items:center;gap:12px}.logo{width:44px;height:44px;border-radius:15px;display:grid;place-items:center;background:linear-gradient(135deg,#8cf1e8,#788cff);color:#07111e;font-size:24px;font-weight:900;box-shadow:0 0 30px #68e5ed44}.brand strong{letter-spacing:5px;font-size:20px}.brand small{display:block;color:var(--muted);font-size:10px;letter-spacing:2px}.state{font-size:11px;border:1px solid #665431;color:#ffd58c;padding:7px 10px;border-radius:30px}.hero{text-align:center;padding:24px 10px 24px}.hero h1{font-size:clamp(32px,7vw,48px);margin:0 0 8px;letter-spacing:-1px}.hero h1 span{color:var(--cyan)}.hero p{color:var(--muted);margin:0 auto;max-width:550px;line-height:1.55}.panel{background:#111a2beF;border:1px solid var(--line);border-radius:22px;padding:16px;box-shadow:0 18px 60px #0005}.toolbar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap}.tag{font-size:12px;color:var(--cyan)}button{font:inherit;border:1px solid var(--line);background:#1a2740;color:var(--white);padding:10px 13px;border-radius:12px;cursor:pointer}button:disabled{opacity:.55;cursor:wait}.clear{font-size:12px}.messages{min-height:270px;max-height:52vh;overflow:auto;padding:12px 2px}.msg{white-space:pre-wrap;overflow-wrap:anywhere;max-width:90%;padding:12px 14px;border-radius:16px;margin:10px 0;line-height:1.55}.bot{background:#1a2943;border:1px solid #2b405d}.user{background:#123e48;border:1px solid #236978;margin-left:auto}.error{background:#3a2028;border:1px solid #77404b}.composer{display:flex;gap:8px;margin-top:8px}.composer textarea{resize:vertical;min-height:50px;max-height:150px;flex:1;min-width:0;background:#091321;border:1px solid var(--line);border-radius:13px;padding:13px;color:var(--white);font:inherit}.send{background:linear-gradient(135deg,#77e7e9,#8298ff);border:0;color:#07111e;font-weight:800;padding-inline:18px}.settings{margin-top:16px;border-top:1px solid var(--line);padding-top:14px}.settings summary{cursor:pointer;color:var(--cyan);font-weight:650}.settings p,.note{color:var(--muted);font-size:12px;line-height:1.55}.settings label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}.settings input,.settings select{width:100%;padding:12px;background:#091321;color:var(--white);border:1px solid var(--line);border-radius:10px;font:inherit}.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.primary{border-color:#478b91;color:#a8f4f2}.note{margin-top:14px;padding:10px 12px;border-left:3px solid #d7ad68;background:#2d261c;border-radius:8px}.foot{text-align:center;color:var(--muted);font-size:11px;padding:16px 4px}.typing{color:var(--cyan);font-size:12px;padding:0 4px 8px}
+@media(max-width:520px){main{padding:12px 10px}.panel{padding:12px}.hero{padding-top:15px}.composer{align-items:stretch}.send{padding-inline:13px}.msg{max-width:96%}}
+</style>
+</head>
+<body><main>
+<header class="top"><div class="brand"><div class="logo">U</div><div><strong>ULTRON</strong><small>ASISTENTE PERSONAL</small></div></div><div class="state" id="state">● FALTA CONECTAR</div></header>
+<section class="hero"><h1>Hola. Soy <span>ULTRON.</span></h1><p>Tu asistente de inteligencia artificial. Conversación con contexto, respuestas reales y configuración sencilla.</p></section>
+<section class="panel">
+<div class="toolbar"><span class="tag">● Motor remoto Groq · GPT-OSS 20B</span><button class="clear" id="clear" type="button">Nueva conversación</button></div>
+<div class="messages" id="messages" aria-live="polite"><div class="msg bot">Hola. Soy ULTRON. Para empezar, conecta tu clave privada de Groq en Configuración. La clave no se guarda en el repositorio.</div></div>
+<div class="typing" id="typing" hidden>ULTRON está pensando…</div>
+<form class="composer" id="form"><textarea id="prompt" rows="1" placeholder="Escribe tu mensaje…" aria-label="Mensaje"></textarea><button class="send" id="send" type="submit">Enviar</button></form>
+<details class="settings" open id="settings"><summary>⚙ CONFIGURAR ULTRON</summary>
+<label for="key">Tu clave API de Groq (privada)</label><input id="key" type="password" autocomplete="off" placeholder="Pega aquí tu clave gsk_…" spellcheck="false">
+<label for="model">Modelo de IA</label><select id="model"><option value="openai/gpt-oss-20b">GPT-OSS 20B · recomendado</option><option value="llama-3.3-70b-versatile">Llama 3.3 70B</option><option value="llama-3.1-8b-instant">Llama 3.1 8B · rápido</option></select>
+<div class="actions"><button class="primary" id="connect" type="button">Conectar y probar</button><button id="forget" type="button">Borrar clave</button></div>
+<p>La clave se conserva solo en la sesión actual del navegador y se envía directamente a Groq. No la escribas en el chat, no la compartas y no la guardes en GitHub. Esta versión web no usa un servidor privado intermediario.</p>
+</details>
+<div class="note">ULTRON usa un modelo alojado en la nube. Necesita Internet y una clave API válida. El modo local todavía no está integrado; no se simula que funcione sin conexión.</div>
+</section><div class="foot">ULTRON · Proyecto independiente · Historial limitado a esta sesión</div>
+</main>
+<script>
+(()=> {
+const $=id=>document.getElementById(id);
+const messages=$('messages'),key=$('key'),model=$('model'),state=$('state'),form=$('form'),prompt=$('prompt'),send=$('send'),typing=$('typing');
+const history=[{role:'system',content:'Eres ULTRON, un asistente personal inteligente, útil, honesto y claro. Hablas en español salvo que el usuario pida otro idioma. Mantienes el contexto de esta conversación. No inventes acciones realizadas, datos ni capacidades. Explica las limitaciones con transparencia. Sé amable y directo.'}];
+let busy=false;
+function add(text,who='bot',isError=false){const el=document.createElement('div');el.className='msg '+(isError?'error':who);el.textContent=text;messages.appendChild(el);messages.scrollTop=messages.scrollHeight;}
+function setState(text,ok=false){state.textContent=(ok?'● ':'● ')+text;state.style.color=ok?'#9ff0bd':'#ffd58c';state.style.borderColor=ok?'#39764d':'#665431';}
+function savedKey(){return key.value.trim()||sessionStorage.getItem('ultron_groq_key')||'';}
+async function connect(){const k=savedKey();if(!k){$('settings').open=true;key.focus();add('Necesito tu clave API de Groq para conectar el motor. Pégala en Configurar ULTRON.','bot',true);return false;}
+setState('CONECTANDO');try{const r=await fetch('https://api.groq.com/openai/v1/models',{headers:{Authorization:'Bearer '+k}});const data=await r.json();if(!r.ok)throw new Error(data.error?.message||'Groq rechazó la clave ('+r.status+').');sessionStorage.setItem('ultron_groq_key',k);setState('CONECTADO',true);return true;}catch(e){setState('ERROR DE CONEXIÓN');add('No pude conectar: '+e.message+'. Comprueba la clave y la conexión a Internet.','bot',true);return false;}}
+$('connect').addEventListener('click',async()=>{if(key.value.trim())sessionStorage.setItem('ultron_groq_key',key.value.trim());await connect();});
+$('forget').addEventListener('click',()=>{sessionStorage.removeItem('ultron_groq_key');key.value='';setState('FALTA CONECTAR');add('Clave borrada de esta sesión.','bot');});
+$('clear').addEventListener('click',()=>{history.splice(1);messages.innerHTML='';add('Nueva conversación. ¿En qué puedo ayudarte?');});
+form.addEventListener('submit',async e=>{e.preventDefault();const q=prompt.value.trim();if(!q||busy)return;if(!savedKey()){add('Antes de conversar, conecta tu clave API en Configurar ULTRON.','bot',true);$('settings').open=true;return;}
+prompt.value='';add(q,'user');history.push({role:'user',content:q});busy=true;send.disabled=true;typing.hidden=false;
+try{const r=await fetch('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json',Authorization:'Bearer '+savedKey()},body:JSON.stringify({model:model.value,messages:history,temperature:0.7,max_tokens:2048})});const data=await r.json();if(!r.ok)throw new Error(data.error?.message||'Error del proveedor ('+r.status+').');const answer=data.choices?.[0]?.message?.content;if(!answer)throw new Error('El proveedor no devolvió texto.');history.push({role:'assistant',content:answer});add(answer);setState('CONECTADO',true);}catch(err){history.pop();add('No pude obtener respuesta: '+err.message+'. Si el navegador bloquea la solicitud, necesitaremos un pequeño servidor seguro como intermediario.','bot',true);setState('REVISAR CONEXIÓN');}finally{busy=false;send.disabled=false;typing.hidden=true;prompt.focus();}});
+const existing=sessionStorage.getItem('ultron_groq_key');if(existing){key.value=existing;setState('CLAVE EN ESTA SESIÓN');}
+})();
+</script></body></html>
