@@ -1,0 +1,12 @@
+{
+  "name": "ULTRON — Asistente personal",
+  "short_name": "ULTRON",
+  "description": "Asistente personal de inteligencia artificial",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#090d17",
+  "theme_color": "#090d17",
+  "lang": "es",
+  "icons": []
+}
