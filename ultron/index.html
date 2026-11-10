@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#090d17"><meta name="description" content="ULTRON, asistente personal de IA.">
-<title>ULTRON — Asistente personal</title>
+<title>ULTRON — Asistente personal</title><link rel="manifest" href="./manifest.webmanifest">
 <style>
 :root{color-scheme:dark;--bg:#090d17;--panel:#111a2b;--line:#293650;--muted:#9aabc2;--cyan:#7de4ef;--white:#edf4ff;--red:#ff8e8e}
 *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 50% -25%,#24365b 0,transparent 58%),var(--bg);color:var(--white);font:16px system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
@@ -29,7 +29,7 @@ main{max-width:900px;margin:auto;padding:18px 14px 34px}.top{display:flex;justif
 </section><div class="foot">ULTRON · Proyecto independiente · Memoria local del navegador</div>
 </main>
 <script>
-(()=> {
+(()=> {\nif('serviceWorker' in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}));}
 const $=id=>document.getElementById(id);
 const messages=$('messages'),key=$('key'),model=$('model'),state=$('state'),form=$('form'),prompt=$('prompt'),send=$('send'),typing=$('typing');
 const systemMessage={role:'system',content:'Eres ULTRON, un asistente personal inteligente, útil, honesto y claro. Hablas en español salvo que el usuario pida otro idioma. Mantienes el contexto de esta conversación. No inventes acciones realizadas, datos ni capacidades. Explica las limitaciones con transparencia. Sé amable y directo.'};
