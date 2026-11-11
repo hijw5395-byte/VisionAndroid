@@ -39,7 +39,7 @@ class VisionViewModel : ViewModel() {
     var status by mutableStateOf("Motor remoto · configuración pendiente")
     var busy by mutableStateOf(false)
 
-    fun setMode(value: EngineMode) {
+    fun changeMode(value: EngineMode) {
         mode = value
         status = if (value == EngineMode.LOCAL) "Modo local · modelo aún no instalado"
                  else "Modo remoto · " + if (endpoint.isBlank()) "configuración pendiente" else "endpoint configurado"
@@ -119,9 +119,9 @@ fun VisionApp(vm: VisionViewModel = viewModel()) {
                 }
                 Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     FilterChip(selected = vm.mode == EngineMode.REMOTE,
-                        onClick = { vm.setMode(EngineMode.REMOTE) }, label = { Text("Nube") })
+                        onClick = { vm.changeMode(EngineMode.REMOTE) }, label = { Text("Nube") })
                     FilterChip(selected = vm.mode == EngineMode.LOCAL,
-                        onClick = { vm.setMode(EngineMode.LOCAL) }, label = { Text("Local") })
+                        onClick = { vm.changeMode(EngineMode.LOCAL) }, label = { Text("Local") })
                 }
                 Surface(color = panel, shape = RoundedCornerShape(14.dp)) {
                     Text(vm.status, Modifier.fillMaxWidth().padding(12.dp), color = Color(0xFFB9C5E8))
